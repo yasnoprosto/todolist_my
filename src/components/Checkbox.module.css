@@ -1,0 +1,23 @@
+li {
+    list-style: none;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.completedTask {
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.activeTask {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.checkboxText {
+    margin: 5px 10px;
+}
