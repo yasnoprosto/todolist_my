@@ -25,6 +25,7 @@ export const Todolist = () => {
     const [filter, setFilter] = useState<FilterType>("All");
     const [activeFilter, setActiveFilter] = useState<FilterType>("All");
     const [activeSort, setActiveSort] = useState<SortButtonType>("");
+    const [error, setError] = useState("");
 
     const filteredTasks = () => {
         switch (filter) {
@@ -45,10 +46,13 @@ export const Todolist = () => {
         if (title.trim()) {
             setTasks([{id: v1(), title: title.trim(), isDone: false}, ...tasks]);
             setTitle("");
+        } else {
+            setError('Title is required')
         }
     };
 
     const onEnterPress = (e: KeyboardEvent<HTMLInputElement>) => {
+        setError("")
         if (e.key === "Enter") {
             onAddClick();
         }
@@ -91,10 +95,12 @@ export const Todolist = () => {
 
     return (
         <div className={s.App}>
+            <div className={s.title}>TODOLIST</div>
             <div>
                 <Input value={title} onChange={onInputChange} onEnterPress={onEnterPress}/>
                 <AddButton name={"+"} onAddClick={onAddClick}/>
             </div>
+            <div className={s.error}>{error}</div>
             <div>
                 <Checkbox tasks={filteredTasks()} onStatusChangeClick={onStatusChangeClick}
                           onDeleteClick={onDeleteClick}/>
